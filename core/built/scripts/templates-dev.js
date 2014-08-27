@@ -759,6 +759,32 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
   
 }); });
 
+define('ghost/templates/modals/auth-failed-unsaved', ['exports'], function(__exports__){ __exports__['default'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
+this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
+  var buffer = '', stack1, helper, options, self=this, helperMissing=helpers.helperMissing;
+
+function program1(depth0,data) {
+  
+  
+  data.buffer.push("\n\n    <p>Hey there! Something has gone wrong and you have been logged out.  It looks like you have unsaved content that will be lost if you leave this page.</p>\n\n    <p>Copy your content somewhere safe before you go!</p>\n\n");
+  }
+
+  stack1 = (helper = helpers['gh-modal-dialog'] || (depth0 && depth0['gh-modal-dialog']),options={hash:{
+    'action': ("closeModal"),
+    'showClose': (true),
+    'type': ("action"),
+    'style': ("wide,centered"),
+    'animation': ("fade"),
+    'title': ("Post NOT saved."),
+    'confirm': ("confirm")
+  },hashTypes:{'action': "STRING",'showClose': "BOOLEAN",'type': "STRING",'style': "STRING",'animation': "STRING",'title': "STRING",'confirm': "ID"},hashContexts:{'action': depth0,'showClose': depth0,'type': depth0,'style': depth0,'animation': depth0,'title': depth0,'confirm': depth0},inverse:self.noop,fn:self.program(1, program1, data),contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "gh-modal-dialog", options));
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n");
+  return buffer;
+  
+}); });
+
 define('ghost/templates/modals/delete-all', ['exports'], function(__exports__){ __exports__['default'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
@@ -995,8 +1021,22 @@ function program1(depth0,data) {
 define('ghost/templates/post-settings-menu', ['exports'], function(__exports__){ __exports__['default'] = Ember.Handlebars.template(function anonymous(Handlebars,depth0,helpers,partials,data) {
 this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
-  var buffer = '', helper, options, helperMissing=helpers.helperMissing, escapeExpression=this.escapeExpression;
+  var buffer = '', stack1, helper, options, escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing, self=this;
 
+function program1(depth0,data) {
+  
+  var buffer = '';
+  data.buffer.push("\n			<tr class=\"post-setting\">\n				<td class=\"post-setting-label\">\n			<label for=\"post-setting-author\">Author</label>\n		</td>\n		<td class=\"post-setting-field\">\n			<span class=\"gh-select\">\n				");
+  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
+    'name': ("post-setting-author"),
+    'content': ("authors"),
+    'optionValuePath': ("content.id"),
+    'optionLabelPath': ("content.name"),
+    'selection': ("selectedAuthor")
+  },hashTypes:{'name': "STRING",'content': "ID",'optionValuePath': "STRING",'optionLabelPath': "STRING",'selection': "ID"},hashContexts:{'name': depth0,'content': depth0,'optionValuePath': depth0,'optionLabelPath': depth0,'selection': depth0},contexts:[depth0],types:["ID"],data:data})));
+  data.buffer.push("\n			</span>\n		</td>\n		</tr>\n        ");
+  return buffer;
+  }
 
   data.buffer.push("<form>\n	<table class=\"plain\">\n		<tbody>\n			<tr class=\"post-setting\">\n				<td class=\"post-setting-label\">\n					<label for=\"url\">URL</label>\n				</td>\n				<td class=\"post-setting-field\">\n					");
   data.buffer.push(escapeExpression((helper = helpers['gh-blur-input'] || (depth0 && depth0['gh-blur-input']),options={hash:{
@@ -1018,15 +1058,10 @@ helpers = this.merge(helpers, Ember.Handlebars.helpers); data = data || {};
     'placeholder': ("publishedAtPlaceholder"),
     'stopEnterKeyDownPropagation': ("true")
   },hashTypes:{'class': "STRING",'value': "ID",'name': "STRING",'action': "STRING",'placeholder': "ID",'stopEnterKeyDownPropagation': "STRING"},hashContexts:{'class': depth0,'value': depth0,'name': depth0,'action': depth0,'placeholder': depth0,'stopEnterKeyDownPropagation': depth0},contexts:[],types:[],data:data},helper ? helper.call(depth0, options) : helperMissing.call(depth0, "gh-blur-input", options))));
-  data.buffer.push("\n				</td>\n			</tr>\n			<tr class=\"post-setting\">\n				<td class=\"post-setting-label\">\n			<label for=\"post-setting-author\">Author</label>\n		</td>\n		<td class=\"post-setting-field\">\n			<span class=\"gh-select\">\n				");
-  data.buffer.push(escapeExpression(helpers.view.call(depth0, "Ember.Select", {hash:{
-    'name': ("post-setting-author"),
-    'content': ("authors"),
-    'optionValuePath': ("content.id"),
-    'optionLabelPath': ("content.name"),
-    'selection': ("selectedAuthor")
-  },hashTypes:{'name': "STRING",'content': "ID",'optionValuePath': "STRING",'optionLabelPath': "STRING",'selection': "ID"},hashContexts:{'name': depth0,'content': depth0,'optionValuePath': depth0,'optionLabelPath': depth0,'selection': depth0},contexts:[depth0],types:["ID"],data:data})));
-  data.buffer.push("\n			</span>\n		</td>\n		</tr>\n		<tr class=\"post-setting\">\n		<td class=\"post-setting-label\">\n					<label class=\"label\" for=\"static-page\">Static Page</label>\n				</td>\n				<td class=\"post-setting-item\">\n					");
+  data.buffer.push("\n				</td>\n			</tr>\n			");
+  stack1 = helpers.unless.call(depth0, "session.user.isAuthor", {hash:{},hashTypes:{},hashContexts:{},inverse:self.noop,fn:self.program(1, program1, data),contexts:[depth0],types:["ID"],data:data});
+  if(stack1 || stack1 === 0) { data.buffer.push(stack1); }
+  data.buffer.push("\n		<tr class=\"post-setting\">\n		<td class=\"post-setting-label\">\n					<label class=\"label\" for=\"static-page\">Static Page</label>\n				</td>\n				<td class=\"post-setting-item\">\n					");
   data.buffer.push(escapeExpression((helper = helpers.input || (depth0 && depth0.input),options={hash:{
     'type': ("checkbox"),
     'name': ("static-page"),

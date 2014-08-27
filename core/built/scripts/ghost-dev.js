@@ -1367,9 +1367,13 @@ define("ghost/controllers/debug",
                 ic.ajax.request(this.get('ghostPaths.url').api('mail', 'test'), {
                     type: 'POST'
                 }).then(function () {
-                    self.notifications.showSuccess('Check your email for the test message:');
-                }).catch(function (response) {
-                    self.notifications.showErrors(response);
+                    self.notifications.showSuccess('Check your email for the test message.');
+                }).catch(function (error) {
+                    if (typeof error.jqXHR !== 'undefined') {
+                        self.notifications.showAPIError(error);
+                    } else {
+                        self.notifications.showErrors(error);
+                    }
                 });
             }
         }
@@ -1481,6 +1485,45 @@ define("ghost/controllers/forgotten",
     });
     
     __exports__["default"] = ForgottenController;
+  });
+define("ghost/controllers/modals/auth-failed-unsaved", 
+  ["exports"],
+  function(__exports__) {
+    "use strict";
+    var AuthFailedUnsavedController = Ember.Controller.extend({
+        editorController: Ember.computed.alias('model'),
+
+        actions: {
+            confirmAccept: function () {
+                var editorController = this.get('editorController');
+
+                if (editorController) {
+                    editorController.get('model').rollback();
+                }
+
+                window.onbeforeunload = null;
+
+                window.location = this.get('ghostPaths').adminRoot + '/signin/';
+            },
+
+            confirmReject: function () {
+
+            }
+        },
+
+        confirm: {
+            accept: {
+                text: 'Leave',
+                buttonClass: 'btn btn-red'
+            },
+            reject: {
+                text: 'Stay',
+                buttonClass: 'btn btn-default btn-minor'
+            }
+        }
+    });
+
+    __exports__["default"] = AuthFailedUnsavedController;
   });
 define("ghost/controllers/modals/delete-all", 
   ["exports"],
@@ -4963,6 +5006,18 @@ define("ghost/routes/application",
         },
 
         actions: {
+            authorizationFailed: function () {
+                var currentRoute = this.get('controller').get('currentRouteName');
+
+                if (currentRoute.split('.')[0] === 'editor') {
+                    this.send('openModal', 'auth-failed-unsaved', this.controllerFor(currentRoute));
+
+                    return;
+                }
+
+                this._super();
+            },
+
             closePopups: function () {
                 this.get('popover').closePopovers();
                 this.get('notifications').closeAll();
@@ -7568,11 +7623,13 @@ define("ghost/views/settings/users/user",
             return this.get('controller.user.id') !== this.get('currentUser.id');
         }),
         
+        isNotOwnersProfile: Ember.computed.not('controller.user.isOwner'),
+        
         canAssignRoles: Ember.computed.or('currentUser.isAdmin', 'currentUser.isOwner'),
 
         canMakeOwner: Ember.computed.and('currentUser.isOwner', 'isNotOwnProfile', 'controller.user.isAdmin'),
         
-        rolesDropdownIsVisible: Ember.computed.and('isNotOwnProfile', 'canAssignRoles'),
+        rolesDropdownIsVisible: Ember.computed.and('isNotOwnProfile', 'canAssignRoles', 'isNotOwnersProfile'),
 
         deleteUserActionIsVisible: Ember.computed('currentUser', 'canAssignRoles', 'controller.user', function () {
             if ((this.get('canAssignRoles') && this.get('isNotOwnProfile') && !this.get('controller.user.isOwner')) ||
