@@ -5,7 +5,7 @@ var _                = require('lodash'),
     globalUtils      = require('../utils'),
     utils            = require('./utils'),
     users            = require('./users'),
-    when             = require('when'),
+    Promise          = require('bluebird'),
     errors           = require('../errors'),
     config           = require('../config'),
     authentication;
@@ -20,7 +20,7 @@ authentication = {
     /**
      * ## Generate Reset Token
      * generate a reset token for a given email address
-     * @param {{passwordreset}}
+     * @param {Object} object
      * @returns {Promise(passwordreset)} message
      */
     generateResetToken: function generateResetToken(object) {
@@ -31,7 +31,7 @@ authentication = {
             var setup = result.setup[0].status;
 
             if (!setup) {
-                return when.reject(new errors.NoPermissionError('Setup must be completed before making this request.'));
+                return Promise.reject(new errors.NoPermissionError('Setup must be completed before making this request.'));
             }
 
             return utils.checkObject(object, 'passwordreset');
@@ -39,13 +39,10 @@ authentication = {
             if (checkedPasswordReset.passwordreset[0].email) {
                 email = checkedPasswordReset.passwordreset[0].email;
             } else {
-                return when.reject(new errors.BadRequestError('No email provided.'));
+                return Promise.reject(new errors.BadRequestError('No email provided.'));
             }
 
-            return users.read({ context: {internal: true}, email: email, status: 'active' }).then(function (foundUser) {
-                if (!foundUser) {
-                    when.reject(new errors.NotFound('Invalid email address'));
-                }
+            return users.read({context: {internal: true}, email: email, status: 'active'}).then(function () {
                 return settings.read({context: {internal: true}, key: 'dbHash'});
             }).then(function (response) {
                 var dbHash = response.settings[0].value;
@@ -54,7 +51,7 @@ authentication = {
                 var baseUrl = config.forceAdminSSL ? (config.urlSSL || config.url) : config.url,
                     resetUrl = baseUrl.replace(/\/$/, '') + '/ghost/reset/' + resetToken + '/';
 
-                return mail.generateContent({data: { resetUrl: resetUrl  }, template: 'reset-password'});
+                return mail.generateContent({data: {resetUrl: resetUrl}, template: 'reset-password'});
             }).then(function (emailContent) {
                 var payload = {
                     mail: [{
@@ -69,9 +66,9 @@ authentication = {
                 };
                 return mail.send(payload, {context: {internal: true}});
             }).then(function () {
-                return when.resolve({passwordreset: [{message: 'Check your email for further instructions.'}]});
-            }).otherwise(function (error) {
-                return when.reject(error);
+                return Promise.resolve({passwordreset: [{message: 'Check your email for further instructions.'}]});
+            }).catch(function (error) {
+                return Promise.reject(error);
             });
         });
     },
@@ -79,7 +76,7 @@ authentication = {
     /**
      * ## Reset Password
      * reset password if a valid token and password (2x) is passed
-     * @param {{passwordreset}}
+     * @param {Object} object
      * @returns {Promise(passwordreset)} message
      */
     resetPassword: function resetPassword(object) {
@@ -91,7 +88,7 @@ authentication = {
             var setup = result.setup[0].status;
 
             if (!setup) {
-                return when.reject(new errors.NoPermissionError('Setup must be completed before making this request.'));
+                return Promise.reject(new errors.NoPermissionError('Setup must be completed before making this request.'));
             }
 
             return utils.checkObject(object, 'passwordreset');
@@ -104,9 +101,9 @@ authentication = {
                 var dbHash = response.settings[0].value;
                 return dataProvider.User.resetPassword(resetToken, newPassword, ne2Password, dbHash);
             }).then(function () {
-                return when.resolve({passwordreset: [{message: 'Password changed successfully.'}]});
-            }).otherwise(function (error) {
-                return when.reject(new errors.UnauthorizedError(error.message));
+                return Promise.resolve({passwordreset: [{message: 'Password changed successfully.'}]});
+            }).catch(function (error) {
+                return Promise.reject(new errors.UnauthorizedError(error.message));
             });
         });
     },
@@ -127,7 +124,7 @@ authentication = {
             var setup = result.setup[0].status;
 
             if (!setup) {
-                return when.reject(new errors.NoPermissionError('Setup must be completed before making this request.'));
+                return Promise.reject(new errors.NoPermissionError('Setup must be completed before making this request.'));
             }
 
             return utils.checkObject(object, 'invitation');
@@ -144,23 +141,51 @@ authentication = {
             }).then(function (user) {
                 return dataProvider.User.edit({name: name, email: email}, {id: user.id});
             }).then(function () {
-                return when.resolve({invitation: [{message: 'Invitation accepted.'}]});
-            }).otherwise(function (error) {
-                return when.reject(new errors.UnauthorizedError(error.message));
+                return Promise.resolve({invitation: [{message: 'Invitation accepted.'}]});
+            }).catch(function (error) {
+                return Promise.reject(new errors.UnauthorizedError(error.message));
             });
+        });
+    },
+
+    /**
+     * ### Check for invitation
+     * @param {Object} options
+     * @param {string} options.email The email to check for an invitation on
+     * @returns {Promise(Invitation}} An invitation status
+     */
+    isInvitation: function (options) {
+        return authentication.isSetup().then(function (result) {
+            var setup = result.setup[0].status;
+
+            if (!setup) {
+                return Promise.reject(new errors.NoPermissionError('Setup must be completed before making this request.'));
+            }
+
+            if (options.email) {
+                return dataProvider.User.findOne({email: options.email, status: 'invited'}).then(function (response) {
+                    if (response) {
+                        return {invitation: [{valid: true}]};
+                    } else {
+                        return {invitation: [{valid: false}]};
+                    }
+                });
+            } else {
+                return Promise.reject(new errors.BadRequestError('The server did not receive a valid email'));
+            }
         });
     },
 
     isSetup: function () {
         return dataProvider.User.query(function (qb) {
-                qb.whereIn('status', ['active', 'warn-1', 'warn-2', 'warn-3', 'warn-4', 'locked']);
-            }).fetch().then(function (users) {
-                if (users) {
-                    return when.resolve({ setup: [{status: true}]});
-                } else {
-                    return when.resolve({ setup: [{status: false}]});
-                }
-            });
+            qb.whereIn('status', ['active', 'warn-1', 'warn-2', 'warn-3', 'warn-4', 'locked']);
+        }).fetch().then(function (users) {
+            if (users) {
+                return Promise.resolve({setup: [{status: true}]});
+            } else {
+                return Promise.resolve({setup: [{status: false}]});
+            }
+        });
     },
 
     setup: function (object) {
@@ -171,7 +196,7 @@ authentication = {
             var setup = result.setup[0].status;
 
             if (setup) {
-                return when.reject(new errors.NoPermissionError('Setup has already been completed.'));
+                return Promise.reject(new errors.NoPermissionError('Setup has already been completed.'));
             }
 
             return utils.checkObject(object, 'setup');
@@ -226,16 +251,34 @@ authentication = {
                     }]
                 };
 
-            return mail.send(payload, {context: {internal: true}}).otherwise(function (error) {
+            return mail.send(payload, {context: {internal: true}}).catch(function (error) {
                 errors.logError(
                     error.message,
-                    "Unable to send welcome email, your blog will continue to function.",
-                    "Please see http://support.ghost.org/mail/ for instructions on configuring email."
+                    'Unable to send welcome email, your blog will continue to function.',
+                    'Please see http://support.ghost.org/mail/ for instructions on configuring email.'
                 );
             });
-
         }).then(function () {
-            return when.resolve({ users: [setupUser]});
+            return Promise.resolve({users: [setupUser]});
+        });
+    },
+
+    revoke: function (object) {
+        var token;
+
+        if (object.token_type_hint && object.token_type_hint === 'access_token') {
+            token = dataProvider.Accesstoken;
+        } else if (object.token_type_hint && object.token_type_hint === 'refresh_token') {
+            token = dataProvider.Refreshtoken;
+        } else {
+            return errors.BadRequestError('Invalid token_type_hint given.');
+        }
+
+        return token.destroyByToken({token: object.token}).then(function () {
+            return Promise.resolve({token: object.token});
+        }, function () {
+            // On error we still want a 200. See https://tools.ietf.org/html/rfc7009#page-5
+            return Promise.resolve({token: object.token, error: 'Invalid token provided'});
         });
     }
 };

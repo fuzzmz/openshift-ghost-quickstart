@@ -1,9 +1,13 @@
-var when            = require('when'),
+var Promise         = require('bluebird'),
     _               = require('lodash'),
     validation      = require('../validation'),
     errors          = require('../../errors'),
+    uuid            = require('node-uuid'),
+    validator       = require('validator'),
+    tables          = require('../schema').tables,
     validate,
     handleErrors,
+    sanitize,
     cleanError;
 
 cleanError = function cleanError(error) {
@@ -26,10 +30,12 @@ cleanError = function cleanError(error) {
             offendingProperty = temp.length === 2 ? temp[1] : error.model;
             temp = offendingProperty.split('.');
             value = temp.length === 2 ? error.data[temp[1]] : 'unknown';
+        } else if (error.raw.detail) {
+            value = error.raw.detail;
+            offendingProperty = error.model;
         }
         message = 'Duplicate entry found. Multiple values of "' + value + '" found for ' + offendingProperty + '.';
     }
-
 
     offendingProperty = offendingProperty || error.model;
     value = value || 'unknown';
@@ -38,12 +44,11 @@ cleanError = function cleanError(error) {
     return new errors.DataImportError(message, offendingProperty, value);
 };
 
-
 handleErrors = function handleErrors(errorList) {
     var processedErrors = [];
 
     if (!_.isArray(errorList)) {
-        return when.reject(errorList);
+        return Promise.reject(errorList);
     }
 
     _.each(errorList, function (error) {
@@ -57,7 +62,23 @@ handleErrors = function handleErrors(errorList) {
         }
     });
 
-    return when.reject(processedErrors);
+    return Promise.reject(processedErrors);
+};
+
+sanitize = function sanitize(data) {
+    // Check for correct UUID and fix if neccessary
+    _.each(_.keys(data.data), function (tableName) {
+        _.each(data.data[tableName], function (importValues) {
+            var uuidMissing = (!importValues.uuid && tables[tableName].uuid) ? true : false,
+                uuidMalformed = (importValues.uuid && !validator.isUUID(importValues.uuid)) ? true : false;
+
+            if (uuidMissing || uuidMalformed) {
+                importValues.uuid = uuid.v4();
+            }
+        });
+    });
+
+    return data;
 };
 
 validate = function validate(data) {
@@ -69,25 +90,25 @@ validate = function validate(data) {
         });
     });
 
-    return when.settle(validateOps).then(function (descriptors) {
+    return Promise.settle(validateOps).then(function (descriptors) {
         var errorList = [];
 
         _.each(descriptors, function (d) {
-            if (d.state === 'rejected') {
-                errorList = errorList.concat(d.reason);
+            if (d.isRejected()) {
+                errorList = errorList.concat(d.reason());
             }
         });
 
         if (!_.isEmpty(errorList)) {
-            return when.reject(errorList);
+            return Promise.reject(errorList);
         }
-
-        return when.resolve();
     });
 };
 
 module.exports = function (version, data) {
     var importer;
+
+    data = sanitize(data);
 
     return validate(data).then(function () {
         try {
@@ -97,7 +118,7 @@ module.exports = function (version, data) {
         }
 
         if (!importer) {
-            return when.reject('No importer found');
+            return Promise.reject('No importer found');
         }
 
         return importer.importData(data);
