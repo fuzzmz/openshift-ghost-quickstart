@@ -1,6 +1,6 @@
 // # Tag API
 // RESTful API for the Tag resource
-var when       = require('when'),
+var Promise    = require('bluebird'),
     canThis    = require('../permissions').canThis,
     dataProvider = require('../models'),
     errors     = require('../errors'),
@@ -20,11 +20,10 @@ tags = {
     browse: function browse(options) {
         return canThis(options.context).browse.tag().then(function () {
             return dataProvider.Tag.findAll(options).then(function (result) {
-                return { tags: result.toJSON() };
+                return {tags: result.toJSON()};
             });
-
         }, function () {
-            return when.reject(new errors.NoPermissionError('You do not have permission to browse tags.'));
+            return Promise.reject(new errors.NoPermissionError('You do not have permission to browse tags.'));
         });
     }
 };

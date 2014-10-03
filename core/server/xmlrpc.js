@@ -1,22 +1,26 @@
 var _               = require('lodash'),
-    config          = require('./config'),
-    errors          = require('./errors'),
     http            = require('http'),
     xml             = require('xml'),
+    api             = require('./api'),
+    config          = require('./config'),
+    errors          = require('./errors'),
     pingList;
 
 // ToDo: Make this configurable
-pingList = [
-    { host: 'blogsearch.google.com', path: '/ping/RPC2' },
-    { host: 'rpc.pingomatic.com', path: '/' }
-];
+pingList = [{
+    host: 'blogsearch.google.com',
+    path: '/ping/RPC2'
+}, {
+    host: 'rpc.pingomatic.com',
+    path: '/'
+}];
 
 function ping(post) {
     var pingXML,
         title = post.title;
 
     // Only ping when in production and not a page
-    if (process.env.NODE_ENV !== 'production' || post.page) {
+    if (process.env.NODE_ENV !== 'production' || post.page || config.isPrivacyDisabled('useRpcPing')) {
         return;
     }
 
@@ -29,20 +33,26 @@ function ping(post) {
     }
 
     // Need to require here because of circular dependency
-    return config.urlForPost(require('./api').settings, post, true).then(function (url) {
-
+    return config.urlForPost(api.settings, post, true).then(function (url) {
         // Build XML object.
         pingXML = xml({
-            methodCall: [
-                { methodName: 'weblogUpdate.ping' },
-                {
-                    params: [{
-                        param: [{ value: [{ string: title }]}],
-                    }, {
-                        param: [{ value: [{ string: url }]}],
+            methodCall: [{
+                methodName: 'weblogUpdate.ping'
+            }, {
+                params: [{
+                    param: [{
+                        value: [{
+                            string: title
+                        }]
                     }]
-                }
-            ]
+                }, {
+                    param: [{
+                        value: [{
+                            string: url
+                        }]
+                    }]
+                }]
+            }]
         }, {declaration: true});
 
         // Ping each of the defined services.
@@ -59,8 +69,8 @@ function ping(post) {
             req.on('error', function (error) {
                 errors.logError(
                     error,
-                    "Pinging services for updates on your blog failed, your blog will continue to function.",
-                    "If you get this error repeatedly, please seek help from https://ghost.org/forum."
+                    'Pinging services for updates on your blog failed, your blog will continue to function.',
+                    'If you get this error repeatedly, please seek help from https://ghost.org/forum.'
                 );
             });
             req.end();
