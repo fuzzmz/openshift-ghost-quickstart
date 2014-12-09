@@ -115406,3 +115406,186 @@ var Ghost = Ghost || {};
         module.exports = ghostgfm;
     }
 }());
+
+/* jshint node:true, browser:true */
+
+// Adds footnote syntax as per Markdown Extra:
+//
+// https://michelf.ca/projects/php-markdown/extra/#footnotes
+//
+// That's some text with a footnote.[^1]
+//
+// [^1]: And that's the footnote.
+//
+//     That's the second paragraph.
+//
+// Also supports [^n] if you don't want to worry about preserving
+// the footnote order yourself.
+
+function replaceInlineFootnotes(text) {
+    // Inline footnotes e.g. "foo[^1]"
+    var inlineRegex = /(?!^)\[\^(\d|n)\]/gim,
+        i = 0;
+
+    return text.replace(inlineRegex, function (match, n) {
+        // We allow both automatic and manual footnote numbering
+        if (n === 'n') {
+            n = i + 1;
+        }
+
+        var s = '<sup id="fnref:' + n + '">' +
+                  '<a href="#fn:' + n + '" rel="footnote">' + n + '</a>' +
+                '</sup>';
+        i += 1;
+        return s;
+    });
+}
+
+function replaceEndFootnotes(text) {
+    // Expanded footnotes at the end e.g. "[^1]: cool stuff"
+    var endRegex = /\[\^(\d|n)\]: ([\s\S]*?)$(?!    )/gim,
+        m = text.match(endRegex),
+        total = m ? m.length : 0,
+        i = 0;
+
+    return text.replace(endRegex, function (match, n, content) {
+        if (n === 'n') {
+            n = i + 1;
+        }
+
+        content = content.replace(/\n    /g, '<br>');
+
+        var s = '<li class="footnote" id="fn:' + n + '">' +
+                  '<p>' + content + ' <a href="#fnref:' + n +
+                    '" title="return to article">↩</a>' +
+                  '</p>' +
+                '</li>';
+
+        if (i === 0) {
+            s = '<div class="footnotes"><ol>' + s;
+        }
+
+        if (i === total - 1) {
+            s = s + '</ol></div>';
+        }
+
+        i += 1;
+        return s;
+    });
+}
+
+(function () {
+    var footnotes = function () {
+        return [
+            {
+                type: 'lang',
+                filter: function (text) {
+                    var preExtractions = {},
+                        hashID = 0;
+
+                    function hashId() {
+                        return hashID += 1;
+                    }
+
+                    // Extract pre blocks
+                    text = text.replace(/```[\s\S]*?\n```/gim, function (x) {
+                        var hash = hashId();
+                        preExtractions[hash] = x;
+                        return '{gfm-js-extract-pre-' + hash + '}';
+                    }, 'm');
+
+                    text = replaceInlineFootnotes(text);
+                    text = replaceEndFootnotes(text);
+
+                    // replace extractions
+                    text = text.replace(/\{gfm-js-extract-pre-([0-9]+)\}/gm, function (x, y) {
+                        return preExtractions[y];
+                    });
+
+                    return text;
+                }
+            }
+        ];
+    };
+
+    // Client-side export
+    if (typeof window !== 'undefined' && window.Showdown && window.Showdown.extensions) {
+        window.Showdown.extensions.footnotes = footnotes;
+    }
+    // Server-side export
+    if (typeof module !== 'undefined') {
+        module.exports = footnotes;
+    }
+}());
+
+/* jshint node:true, browser:true, -W044 */
+
+// Adds highlight syntax as per RedCarpet:
+//
+// https://github.com/vmg/redcarpet
+//
+// This is ==highlighted==. It looks like this: <mark>highlighted</mark>
+
+(function () {
+    var highlight = function () {
+        return [
+            {
+                type: 'html',
+                filter: function (text) {
+                    var highlightRegex = /(=){2}([\s\S]+?)(=){2}/gim,
+                        preExtractions = {},
+                        codeExtractions = {},
+                        hashID = 0;
+
+                    function hashId() {
+                        return hashID += 1;
+                    }
+
+                    // Extract pre blocks
+                    text = text.replace(/<pre>[\s\S]*?<\/pre>/gim, function (x) {
+                        var hash = hashId();
+                        preExtractions[hash] = x;
+                        return '{gfm-js-extract-pre-' + hash + '}';
+                    }, 'm');
+
+                    // Extract code blocks
+                    text = text.replace(/<code>[\s\S]*?<\/code>/gim, function (x) {
+                        var hash = hashId();
+                        codeExtractions[hash] = x;
+                        return '{gfm-js-extract-code-' + hash + '}';
+                    }, 'm');
+
+                    text = text.replace(highlightRegex, function (match, n, content) {
+                        // Check the content isn't just an `=`
+                        if (!/^=+$/.test(content)) {
+                            return '<mark>' + content + '</mark>';
+                        }
+
+                        return match;
+                    });
+
+                    // replace pre extractions
+                    text = text.replace(/\{gfm-js-extract-pre-([0-9]+)\}/gm, function (x, y) {
+                        return preExtractions[y];
+                    });
+
+                     // replace code extractions
+                    text = text.replace(/\{gfm-js-extract-code-([0-9]+)\}/gm, function (x, y) {
+                        return codeExtractions[y];
+                    });
+
+                    return text;
+                }
+            }
+        ];
+    };
+
+    // Client-side export
+    if (typeof window !== 'undefined' && window.Showdown && window.Showdown.extensions) {
+        window.Showdown.extensions.highlight = highlight;
+    }
+    // Server-side export
+    if (typeof module !== 'undefined') {
+        module.exports = highlight;
+    }
+}());
