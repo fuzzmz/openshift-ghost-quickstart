@@ -112,6 +112,7 @@ ConfigManager.prototype.set = function (config) {
         database: {
             knex: knexInstance
         },
+        ghostVersion: packageInfo.version,
         paths: {
             appRoot:          appRoot,
             subdir:           subdir,
@@ -129,7 +130,6 @@ ConfigManager.prototype.set = function (config) {
             helperTemplates:  path.join(corePath, '/server/helpers/tpl/'),
             exportPath:       path.join(corePath, '/server/data/export/'),
             lang:             path.join(corePath, '/shared/lang/'),
-            debugPath:        subdir + '/ghost/debug/',
 
             availableThemes:  this._config.paths.availableThemes || {},
             availableApps:    this._config.paths.availableApps || {},
