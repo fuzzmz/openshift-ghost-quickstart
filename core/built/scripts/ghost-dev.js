@@ -777,6 +777,8 @@ define("ghost/components/gh-dropdown-button",
 
     var DropdownButton = Ember.Component.extend(DropdownMixin, {
         tagName: 'button',
+        attributeBindings: 'role',
+        role: 'button',
 
         // matches with the dropdown this button toggles
         dropdownName: null,
@@ -1080,7 +1082,7 @@ define("ghost/components/gh-navitem-url-input",
         }),
 
         isRelative: Ember.computed('value', function () {
-            return !validator.isURL(this.get('value'));
+            return !validator.isURL(this.get('value')) && this.get('value').indexOf('mailto:') !== 0;
         }),
 
         didInsertElement: function () {
@@ -1140,6 +1142,7 @@ define("ghost/components/gh-navitem-url-input",
             var url = this.get('value'),
                 baseUrl = this.get('baseUrl');
 
+            // if we have a relative url, create the absolute url to be displayed in the input
             if (this.get('isRelative')) {
                 this.set('value', joinUrlParts(baseUrl, url));
             }
@@ -3759,11 +3762,13 @@ define("ghost/controllers/settings/navigation",
                     blogUrl = this.get('config').blogUrl,
                     blogUrlRegex = new RegExp('^' + blogUrl + '(.*)', 'i'),
                     navItems = this.get('navigationItems'),
+                    message = 'One of your navigation items has an empty label. ' +
+                        '<br /> Please enter a new label or delete the item before saving.',
                     match;
 
                 // Don't save if there's a blank label.
                 if (navItems.find(function (item) { return !item.get('isComplete') && !item.get('last');})) {
-                    self.notifications.showErrors(['One of your navigation items has an empty label.<br>Please enter a new label or delete the item before saving.']);
+                    self.notifications.showErrors([message.htmlSafe()]);
                     return;
                 }
 
@@ -3785,11 +3790,12 @@ define("ghost/controllers/settings/navigation",
                         url = match[1];
 
                         // if the last char is not a slash, then add one,
+                        // as long as there is no # or . in the URL (anchor or file extension)
                         // this also handles the empty case for the homepage
-                        if (url[url.length - 1] !== '/') {
+                        if (url[url.length - 1] !== '/' && url.indexOf('#') === -1 && url.indexOf('.') === -1) {
                             url += '/';
                         }
-                    } else if (!validator.isURL(url) && url !== '' && url[0] !== '/') {
+                    } else if (!validator.isURL(url) && url !== '' && url[0] !== '/' && url.indexOf('mailto:') !== 0) {
                         url = '/' + url;
                     }
 
@@ -6890,6 +6896,11 @@ define("ghost/routes/application",
 
             sessionAuthenticationFailed: function (error) {
                 if (error.errors) {
+                    // These are server side errors, which can be marked as htmlSafe
+                    error.errors.forEach(function (err) {
+                        err.message = err.message.htmlSafe();
+                    });
+
                     this.notifications.showErrors(error.errors);
                 } else {
                     // connection errors don't return proper status message, only req.body
