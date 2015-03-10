@@ -1,7 +1,7 @@
 {
 "name":"Ghost",
 "website":"http://tryghost.org/",
-"version":"0.5.9",
+"version":"0.5.10",
 "initial_git_url":"https://github.com/fuzzmz/openshift-ghost-quickstart.git",
 "cartridges":["nodejs-0.10"],
 "env_variables":[{"name":"value"},{"name":"value"}],
