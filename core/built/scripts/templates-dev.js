@@ -86,12 +86,12 @@ define('ghost/templates/-contributors', ['exports'], function(__exports__){ __ex
       var el2 = dom.createTextNode("\n    ");
       dom.appendChild(el1, el2);
       var el2 = dom.createElement("a");
-      dom.setAttribute(el2,"href","https://github.com/rwjblue");
-      dom.setAttribute(el2,"title","rwjblue");
+      dom.setAttribute(el2,"href","https://github.com/felixrieseberg");
+      dom.setAttribute(el2,"title","felixrieseberg");
       var el3 = dom.createTextNode("\n        ");
       dom.appendChild(el2, el3);
       var el3 = dom.createElement("img");
-      dom.setAttribute(el3,"alt","rwjblue");
+      dom.setAttribute(el3,"alt","felixrieseberg");
       dom.appendChild(el2, el3);
       var el3 = dom.createTextNode("\n    ");
       dom.appendChild(el2, el3);
@@ -105,12 +105,12 @@ define('ghost/templates/-contributors', ['exports'], function(__exports__){ __ex
       var el2 = dom.createTextNode("\n    ");
       dom.appendChild(el1, el2);
       var el2 = dom.createElement("a");
-      dom.setAttribute(el2,"href","https://github.com/felixrieseberg");
-      dom.setAttribute(el2,"title","felixrieseberg");
+      dom.setAttribute(el2,"href","https://github.com/rwjblue");
+      dom.setAttribute(el2,"title","rwjblue");
       var el3 = dom.createTextNode("\n        ");
       dom.appendChild(el2, el3);
       var el3 = dom.createElement("img");
-      dom.setAttribute(el3,"alt","felixrieseberg");
+      dom.setAttribute(el3,"alt","rwjblue");
       dom.appendChild(el2, el3);
       var el3 = dom.createTextNode("\n    ");
       dom.appendChild(el2, el3);
@@ -162,6 +162,25 @@ define('ghost/templates/-contributors', ['exports'], function(__exports__){ __ex
       var el2 = dom.createTextNode("\n    ");
       dom.appendChild(el1, el2);
       var el2 = dom.createElement("a");
+      dom.setAttribute(el2,"href","https://github.com/ekulabuhov");
+      dom.setAttribute(el2,"title","ekulabuhov");
+      var el3 = dom.createTextNode("\n        ");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createElement("img");
+      dom.setAttribute(el3,"alt","ekulabuhov");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("\n    ");
+      dom.appendChild(el2, el3);
+      dom.appendChild(el1, el2);
+      var el2 = dom.createTextNode("\n");
+      dom.appendChild(el1, el2);
+      dom.appendChild(el0, el1);
+      var el1 = dom.createTextNode("\n");
+      dom.appendChild(el0, el1);
+      var el1 = dom.createElement("li");
+      var el2 = dom.createTextNode("\n    ");
+      dom.appendChild(el1, el2);
+      var el2 = dom.createElement("a");
       dom.setAttribute(el2,"href","https://github.com/novaugust");
       dom.setAttribute(el2,"title","novaugust");
       var el3 = dom.createTextNode("\n        ");
@@ -187,44 +206,6 @@ define('ghost/templates/-contributors', ['exports'], function(__exports__){ __ex
       dom.appendChild(el2, el3);
       var el3 = dom.createElement("img");
       dom.setAttribute(el3,"alt","dbalders");
-      dom.appendChild(el2, el3);
-      var el3 = dom.createTextNode("\n    ");
-      dom.appendChild(el2, el3);
-      dom.appendChild(el1, el2);
-      var el2 = dom.createTextNode("\n");
-      dom.appendChild(el1, el2);
-      dom.appendChild(el0, el1);
-      var el1 = dom.createTextNode("\n");
-      dom.appendChild(el0, el1);
-      var el1 = dom.createElement("li");
-      var el2 = dom.createTextNode("\n    ");
-      dom.appendChild(el1, el2);
-      var el2 = dom.createElement("a");
-      dom.setAttribute(el2,"href","https://github.com/ekulabuhov");
-      dom.setAttribute(el2,"title","ekulabuhov");
-      var el3 = dom.createTextNode("\n        ");
-      dom.appendChild(el2, el3);
-      var el3 = dom.createElement("img");
-      dom.setAttribute(el3,"alt","ekulabuhov");
-      dom.appendChild(el2, el3);
-      var el3 = dom.createTextNode("\n    ");
-      dom.appendChild(el2, el3);
-      dom.appendChild(el1, el2);
-      var el2 = dom.createTextNode("\n");
-      dom.appendChild(el1, el2);
-      dom.appendChild(el0, el1);
-      var el1 = dom.createTextNode("\n");
-      dom.appendChild(el0, el1);
-      var el1 = dom.createElement("li");
-      var el2 = dom.createTextNode("\n    ");
-      dom.appendChild(el1, el2);
-      var el2 = dom.createElement("a");
-      dom.setAttribute(el2,"href","https://github.com/sebgie");
-      dom.setAttribute(el2,"title","sebgie");
-      var el3 = dom.createTextNode("\n        ");
-      dom.appendChild(el2, el3);
-      var el3 = dom.createElement("img");
-      dom.setAttribute(el3,"alt","sebgie");
       dom.appendChild(el2, el3);
       var el3 = dom.createTextNode("\n    ");
       dom.appendChild(el2, el3);
@@ -270,25 +251,6 @@ define('ghost/templates/-contributors', ['exports'], function(__exports__){ __ex
       var el2 = dom.createTextNode("\n");
       dom.appendChild(el1, el2);
       dom.appendChild(el0, el1);
-      var el1 = dom.createTextNode("\n");
-      dom.appendChild(el0, el1);
-      var el1 = dom.createElement("li");
-      var el2 = dom.createTextNode("\n    ");
-      dom.appendChild(el1, el2);
-      var el2 = dom.createElement("a");
-      dom.setAttribute(el2,"href","https://github.com/jgable");
-      dom.setAttribute(el2,"title","jgable");
-      var el3 = dom.createTextNode("\n        ");
-      dom.appendChild(el2, el3);
-      var el3 = dom.createElement("img");
-      dom.setAttribute(el3,"alt","jgable");
-      dom.appendChild(el2, el3);
-      var el3 = dom.createTextNode("\n    ");
-      dom.appendChild(el2, el3);
-      dom.appendChild(el1, el2);
-      var el2 = dom.createTextNode("\n");
-      dom.appendChild(el1, el2);
-      dom.appendChild(el0, el1);
       return el0;
     },
     render: function render(context, env, contextualElement) {
@@ -324,8 +286,6 @@ define('ghost/templates/-contributors', ['exports'], function(__exports__){ __ex
       var element10 = dom.childAt(fragment, [20, 1, 1]);
       var element11 = dom.childAt(fragment, [22, 1, 1]);
       var element12 = dom.childAt(fragment, [24, 1, 1]);
-      var element13 = dom.childAt(fragment, [26, 1, 1]);
-      var element14 = dom.childAt(fragment, [28, 1, 1]);
       var attrMorph0 = dom.createAttrMorph(element0, 'src');
       var attrMorph1 = dom.createAttrMorph(element1, 'src');
       var attrMorph2 = dom.createAttrMorph(element2, 'src');
@@ -339,23 +299,19 @@ define('ghost/templates/-contributors', ['exports'], function(__exports__){ __ex
       var attrMorph10 = dom.createAttrMorph(element10, 'src');
       var attrMorph11 = dom.createAttrMorph(element11, 'src');
       var attrMorph12 = dom.createAttrMorph(element12, 'src');
-      var attrMorph13 = dom.createAttrMorph(element13, 'src');
-      var attrMorph14 = dom.createAttrMorph(element14, 'src');
       attribute(env, attrMorph0, element0, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/jaswilli"]));
       attribute(env, attrMorph1, element1, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/ErisDS"]));
       attribute(env, attrMorph2, element2, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/PaulAdamDavis"]));
       attribute(env, attrMorph3, element3, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/cobbspur"]));
-      attribute(env, attrMorph4, element4, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/rwjblue"]));
-      attribute(env, attrMorph5, element5, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/felixrieseberg"]));
+      attribute(env, attrMorph4, element4, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/felixrieseberg"]));
+      attribute(env, attrMorph5, element5, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/rwjblue"]));
       attribute(env, attrMorph6, element6, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/JohnONolan"]));
       attribute(env, attrMorph7, element7, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/halfdan"]));
-      attribute(env, attrMorph8, element8, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/novaugust"]));
-      attribute(env, attrMorph9, element9, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/dbalders"]));
-      attribute(env, attrMorph10, element10, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/ekulabuhov"]));
-      attribute(env, attrMorph11, element11, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/sebgie"]));
-      attribute(env, attrMorph12, element12, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/chilts"]));
-      attribute(env, attrMorph13, element13, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/nsfmc"]));
-      attribute(env, attrMorph14, element14, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/jgable"]));
+      attribute(env, attrMorph8, element8, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/ekulabuhov"]));
+      attribute(env, attrMorph9, element9, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/novaugust"]));
+      attribute(env, attrMorph10, element10, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/dbalders"]));
+      attribute(env, attrMorph11, element11, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/chilts"]));
+      attribute(env, attrMorph12, element12, "src", concat(env, [subexpr(env, context, "gh-path", ["admin", "/img/contributors"], {}), "/nsfmc"]));
       return fragment;
     }
   };
@@ -730,11 +686,11 @@ define('ghost/templates/-navbar', ['exports'], function(__exports__){ __exports_
         } else {
           fragment = this.build(dom);
         }
-        var element1 = dom.childAt(fragment, [1]);
-        var element2 = dom.childAt(element1, [1]);
+        var element2 = dom.childAt(fragment, [1]);
+        var element3 = dom.childAt(element2, [1]);
         var morph0 = dom.createMorphAt(dom.childAt(fragment, [3]),0,1);
-        element(env, element1, context, "bind-attr", [], {"style": get(env, context, "userImageBackground")});
-        element(env, element2, context, "bind-attr", [], {"src": "userImage", "title": "userImageAlt"});
+        element(env, element2, context, "bind-attr", [], {"style": get(env, context, "userImageBackground")});
+        element(env, element3, context, "bind-attr", [], {"src": "userImage", "title": "userImageAlt"});
         content(env, morph0, context, "session.user.name");
         return fragment;
       }
@@ -837,22 +793,6 @@ define('ghost/templates/-navbar', ['exports'], function(__exports__){ __exports_
         var el2 = dom.createTextNode("\n                ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("li");
-        dom.setAttribute(el2,"role","presentation");
-        var el3 = dom.createElement("a");
-        dom.setAttribute(el3,"class","dropdown-item user-menu-support");
-        dom.setAttribute(el3,"role","menuitem");
-        dom.setAttribute(el3,"tabindex","-1");
-        dom.setAttribute(el3,"href","http://support.ghost.org/");
-        var el4 = dom.createElement("i");
-        dom.setAttribute(el4,"class","icon-support");
-        dom.appendChild(el3, el4);
-        var el4 = dom.createTextNode(" Help / Support");
-        dom.appendChild(el3, el4);
-        dom.appendChild(el2, el3);
-        dom.appendChild(el1, el2);
-        var el2 = dom.createTextNode("\n                ");
-        dom.appendChild(el1, el2);
-        var el2 = dom.createElement("li");
         dom.setAttribute(el2,"class","divider");
         dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n                ");
@@ -887,11 +827,204 @@ define('ghost/templates/-navbar', ['exports'], function(__exports__){ __exports_
         } else {
           fragment = this.build(dom);
         }
-        var element0 = dom.childAt(fragment, [1]);
-        var morph0 = dom.createMorphAt(dom.childAt(element0, [1]),-1,-1);
-        var morph1 = dom.createMorphAt(dom.childAt(element0, [7]),-1,-1);
+        var element1 = dom.childAt(fragment, [1]);
+        var morph0 = dom.createMorphAt(dom.childAt(element1, [1]),-1,-1);
+        var morph1 = dom.createMorphAt(dom.childAt(element1, [5]),-1,-1);
         block(env, morph0, context, "link-to", ["settings.users.user", get(env, context, "session.user.slug")], {"classNames": "dropdown-item user-menu-profile js-nav-item", "role": "menuitem", "tabindex": "-1"}, child0, null);
         block(env, morph1, context, "link-to", ["signout"], {"classNames": "dropdown-item user-menu-signout", "role": "menuitem", "tabindex": "-1"}, child1, null);
+        return fragment;
+      }
+    };
+  }());
+  var child5 = (function() {
+    return {
+      isHTMLBars: true,
+      blockParams: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      build: function build(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createTextNode("            ");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("div");
+        dom.setAttribute(el1,"class","help-button");
+        var el2 = dom.createTextNode("\n                ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("i");
+        dom.setAttribute(el2,"class","icon-question");
+        var el3 = dom.createElement("span");
+        dom.setAttribute(el3,"class","hidden");
+        var el4 = dom.createTextNode("Help");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n            ");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      render: function render(context, env, contextualElement) {
+        var dom = env.dom;
+        dom.detectNamespace(contextualElement);
+        var fragment;
+        if (env.useFragmentCache && dom.canClone) {
+          if (this.cachedFragment === null) {
+            fragment = this.build(dom);
+            if (this.hasRendered) {
+              this.cachedFragment = fragment;
+            } else {
+              this.hasRendered = true;
+            }
+          }
+          if (this.cachedFragment) {
+            fragment = dom.cloneNode(this.cachedFragment, true);
+          }
+        } else {
+          fragment = this.build(dom);
+        }
+        return fragment;
+      }
+    };
+  }());
+  var child6 = (function() {
+    return {
+      isHTMLBars: true,
+      blockParams: 0,
+      cachedFragment: null,
+      hasRendered: false,
+      build: function build(dom) {
+        var el0 = dom.createDocumentFragment();
+        var el1 = dom.createTextNode("            ");
+        dom.appendChild(el0, el1);
+        var el1 = dom.createElement("ul");
+        dom.setAttribute(el1,"class","dropdown-menu dropdown-triangle-top");
+        dom.setAttribute(el1,"role","menu");
+        var el2 = dom.createTextNode("\n                ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("li");
+        dom.setAttribute(el2,"role","presentation");
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3,"class","dropdown-item help-menu-support");
+        dom.setAttribute(el3,"role","menuitem");
+        dom.setAttribute(el3,"tabindex","-1");
+        dom.setAttribute(el3,"href","http://support.ghost.org/");
+        dom.setAttribute(el3,"target","_blank");
+        var el4 = dom.createElement("i");
+        dom.setAttribute(el4,"class","icon-support");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode(" Support Center");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n                ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("li");
+        dom.setAttribute(el2,"role","presentation");
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3,"class","dropdown-item help-menu-tweet");
+        dom.setAttribute(el3,"role","menuitem");
+        dom.setAttribute(el3,"tabindex","-1");
+        dom.setAttribute(el3,"href","https://twitter.com/intent/tweet?text=%40TryGhost+Hi%21+Can+you+help+me+with+&related=TryGhost");
+        dom.setAttribute(el3,"target","_blank");
+        dom.setAttribute(el3,"onclick","window.open(this.href, 'twitter-share', 'width=550,height=235');return false;");
+        var el4 = dom.createElement("i");
+        dom.setAttribute(el4,"class","icon-twitter");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode(" Tweet @TryGhost!");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n                ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("li");
+        dom.setAttribute(el2,"class","divider");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n                ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("li");
+        dom.setAttribute(el2,"role","presentation");
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3,"class","dropdown-item help-menu-how-to");
+        dom.setAttribute(el3,"role","menuitem");
+        dom.setAttribute(el3,"tabindex","-1");
+        dom.setAttribute(el3,"href","http://support.ghost.org/how-to-use-ghost/");
+        dom.setAttribute(el3,"target","_blank");
+        var el4 = dom.createElement("i");
+        dom.setAttribute(el4,"class","icon-book");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode(" How to Use Ghost");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n                ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("li");
+        dom.setAttribute(el2,"role","presentation");
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3,"class","dropdown-item help-menu-markdown");
+        dom.setAttribute(el3,"role","menuitem");
+        dom.setAttribute(el3,"tabindex","-1");
+        dom.setAttribute(el3,"href","");
+        var el4 = dom.createElement("i");
+        dom.setAttribute(el4,"class","icon-markdown");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode(" Markdown Help");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n                ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("li");
+        dom.setAttribute(el2,"class","divider");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n                ");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("li");
+        dom.setAttribute(el2,"role","presentation");
+        var el3 = dom.createElement("a");
+        dom.setAttribute(el3,"class","dropdown-item help-menu-wishlist");
+        dom.setAttribute(el3,"role","menuitem");
+        dom.setAttribute(el3,"tabindex","-1");
+        dom.setAttribute(el3,"href","http://ideas.ghost.org/");
+        dom.setAttribute(el3,"target","_blank");
+        var el4 = dom.createElement("i");
+        dom.setAttribute(el4,"class","icon-list");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode(" Wishlist");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
+        var el2 = dom.createTextNode("\n            ");
+        dom.appendChild(el1, el2);
+        dom.appendChild(el0, el1);
+        var el1 = dom.createTextNode("\n");
+        dom.appendChild(el0, el1);
+        return el0;
+      },
+      render: function render(context, env, contextualElement) {
+        var dom = env.dom;
+        var hooks = env.hooks, element = hooks.element;
+        dom.detectNamespace(contextualElement);
+        var fragment;
+        if (env.useFragmentCache && dom.canClone) {
+          if (this.cachedFragment === null) {
+            fragment = this.build(dom);
+            if (this.hasRendered) {
+              this.cachedFragment = fragment;
+            } else {
+              this.hasRendered = true;
+            }
+          }
+          if (this.cachedFragment) {
+            fragment = dom.cloneNode(this.cachedFragment, true);
+          }
+        } else {
+          fragment = this.build(dom);
+        }
+        var element0 = dom.childAt(fragment, [1, 9, 0]);
+        element(env, element0, context, "action", ["openModal", "markdown"], {});
         return fragment;
       }
     };
@@ -947,6 +1080,17 @@ define('ghost/templates/-navbar', ['exports'], function(__exports__){ __exports_
       var el3 = dom.createTextNode("    ");
       dom.appendChild(el2, el3);
       dom.appendChild(el1, el2);
+      var el2 = dom.createTextNode("\n\n    ");
+      dom.appendChild(el1, el2);
+      var el2 = dom.createElement("div");
+      dom.setAttribute(el2,"class","nav-item help-menu");
+      var el3 = dom.createTextNode("\n");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("");
+      dom.appendChild(el2, el3);
+      var el3 = dom.createTextNode("    ");
+      dom.appendChild(el2, el3);
+      dom.appendChild(el1, el2);
       var el2 = dom.createTextNode("\n\n");
       dom.appendChild(el1, el2);
       dom.appendChild(el0, el1);
@@ -979,22 +1123,28 @@ define('ghost/templates/-navbar', ['exports'], function(__exports__){ __exports_
       } else {
         fragment = this.build(dom);
       }
-      var element3 = dom.childAt(fragment, [0]);
-      var element4 = dom.childAt(element3, [1]);
-      var element5 = dom.childAt(element3, [6]);
-      if (this.cachedFragment) { dom.repairClonedNode(element5,[1]); }
-      var attrMorph0 = dom.createAttrMorph(element4, 'href');
-      var morph0 = dom.createMorphAt(element3,2,3);
-      var morph1 = dom.createMorphAt(element3,3,4);
-      var morph2 = dom.createMorphAt(element3,4,5);
-      var morph3 = dom.createMorphAt(element5,0,1);
-      var morph4 = dom.createMorphAt(element5,1,2);
-      attribute(env, attrMorph0, element4, "href", concat(env, [subexpr(env, context, "gh-path", ["blog"], {})]));
+      var element4 = dom.childAt(fragment, [0]);
+      var element5 = dom.childAt(element4, [1]);
+      var element6 = dom.childAt(element4, [6]);
+      if (this.cachedFragment) { dom.repairClonedNode(element6,[1]); }
+      var element7 = dom.childAt(element4, [8]);
+      if (this.cachedFragment) { dom.repairClonedNode(element7,[1]); }
+      var attrMorph0 = dom.createAttrMorph(element5, 'href');
+      var morph0 = dom.createMorphAt(element4,2,3);
+      var morph1 = dom.createMorphAt(element4,3,4);
+      var morph2 = dom.createMorphAt(element4,4,5);
+      var morph3 = dom.createMorphAt(element6,0,1);
+      var morph4 = dom.createMorphAt(element6,1,2);
+      var morph5 = dom.createMorphAt(element7,0,1);
+      var morph6 = dom.createMorphAt(element7,1,2);
+      attribute(env, attrMorph0, element5, "href", concat(env, [subexpr(env, context, "gh-path", ["blog"], {})]));
       block(env, morph0, context, "link-to", ["posts"], {"classNames": "nav-item nav-content js-nav-item"}, child0, null);
       block(env, morph1, context, "link-to", ["editor.new"], {"classNames": "nav-item nav-new js-nav-item"}, child1, null);
       block(env, morph2, context, "unless", [get(env, context, "session.user.isAuthor")], {}, child2, null);
       block(env, morph3, context, "gh-dropdown-button", [], {"dropdownName": "user-menu", "tagName": "div", "classNames": "nav-label clearfix"}, child3, null);
       block(env, morph4, context, "gh-dropdown", [], {"tagName": "div", "classNames": "dropdown", "name": "user-menu", "closeOnClick": "true"}, child4, null);
+      block(env, morph5, context, "gh-dropdown-button", [], {"dropdownName": "help-menu", "tagName": "div", "classNames": "nav-label clearfix"}, child5, null);
+      block(env, morph6, context, "gh-dropdown", [], {"tagName": "div", "classNames": "dropdown", "name": "help-menu", "closeOnClick": "true"}, child6, null);
       return fragment;
     }
   };
@@ -4311,7 +4461,7 @@ define('ghost/templates/modals/markdown', ['exports'], function(__exports__){ __
         var el2 = dom.createTextNode("\n        For further Markdown syntax reference: ");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("a");
-        dom.setAttribute(el2,"href","http://daringfireball.net/projects/markdown/syntax");
+        dom.setAttribute(el2,"href","http://support.ghost.org/markdown-guide/");
         dom.setAttribute(el2,"target","_blank");
         var el3 = dom.createTextNode("Markdown Documentation");
         dom.appendChild(el2, el3);
@@ -7903,13 +8053,10 @@ define('ghost/templates/settings/general', ['exports'], function(__exports__){ _
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createTextNode("                ");
         dom.appendChild(el0, el1);
-        var el1 = dom.createElement("button");
-        dom.setAttribute(el1,"type","button");
-        dom.setAttribute(el1,"class","js-modal-logo");
-        var el2 = dom.createElement("img");
-        dom.setAttribute(el2,"id","blog-logo");
-        dom.setAttribute(el2,"alt","logo");
-        dom.appendChild(el1, el2);
+        var el1 = dom.createElement("img");
+        dom.setAttribute(el1,"class","blog-logo");
+        dom.setAttribute(el1,"alt","logo");
+        dom.setAttribute(el1,"role","button");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
@@ -7935,10 +8082,9 @@ define('ghost/templates/settings/general', ['exports'], function(__exports__){ _
         } else {
           fragment = this.build(dom);
         }
-        var element4 = dom.childAt(fragment, [1]);
-        var element5 = dom.childAt(element4, [0]);
-        element(env, element4, context, "action", ["openModal", "upload", get(env, context, "this"), "logo"], {});
-        element(env, element5, context, "bind-attr", [], {"src": get(env, context, "model.logo")});
+        var element3 = dom.childAt(fragment, [1]);
+        element(env, element3, context, "bind-attr", [], {"src": get(env, context, "model.logo")});
+        element(env, element3, context, "action", ["openModal", "upload", get(env, context, "this"), "logo"], {});
         return fragment;
       }
     };
@@ -7983,8 +8129,8 @@ define('ghost/templates/settings/general', ['exports'], function(__exports__){ _
         } else {
           fragment = this.build(dom);
         }
-        var element3 = dom.childAt(fragment, [1]);
-        element(env, element3, context, "action", ["openModal", "upload", get(env, context, "this"), "logo"], {});
+        var element2 = dom.childAt(fragment, [1]);
+        element(env, element2, context, "action", ["openModal", "upload", get(env, context, "this"), "logo"], {});
         return fragment;
       }
     };
@@ -7999,13 +8145,10 @@ define('ghost/templates/settings/general', ['exports'], function(__exports__){ _
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createTextNode("                ");
         dom.appendChild(el0, el1);
-        var el1 = dom.createElement("button");
-        dom.setAttribute(el1,"type","button");
-        dom.setAttribute(el1,"class","js-modal-cover");
-        var el2 = dom.createElement("img");
-        dom.setAttribute(el2,"id","blog-cover");
-        dom.setAttribute(el2,"alt","cover photo");
-        dom.appendChild(el1, el2);
+        var el1 = dom.createElement("img");
+        dom.setAttribute(el1,"class","blog-cover");
+        dom.setAttribute(el1,"alt","cover photo");
+        dom.setAttribute(el1,"role","button");
         dom.appendChild(el0, el1);
         var el1 = dom.createTextNode("\n");
         dom.appendChild(el0, el1);
@@ -8032,9 +8175,8 @@ define('ghost/templates/settings/general', ['exports'], function(__exports__){ _
           fragment = this.build(dom);
         }
         var element1 = dom.childAt(fragment, [1]);
-        var element2 = dom.childAt(element1, [0]);
+        element(env, element1, context, "bind-attr", [], {"src": get(env, context, "model.cover")});
         element(env, element1, context, "action", ["openModal", "upload", get(env, context, "this"), "cover"], {});
-        element(env, element2, context, "bind-attr", [], {"src": get(env, context, "model.cover")});
         return fragment;
       }
     };
@@ -8189,7 +8331,6 @@ define('ghost/templates/settings/general', ['exports'], function(__exports__){ _
       var el4 = dom.createTextNode("\n            ");
       dom.appendChild(el3, el4);
       var el4 = dom.createElement("label");
-      dom.setAttribute(el4,"for","blog-logo");
       var el5 = dom.createTextNode("Blog Logo");
       dom.appendChild(el4, el5);
       dom.appendChild(el3, el4);
@@ -8211,7 +8352,6 @@ define('ghost/templates/settings/general', ['exports'], function(__exports__){ _
       var el4 = dom.createTextNode("\n            ");
       dom.appendChild(el3, el4);
       var el4 = dom.createElement("label");
-      dom.setAttribute(el4,"for","blog-cover");
       var el5 = dom.createTextNode("Blog Cover");
       dom.appendChild(el4, el5);
       dom.appendChild(el3, el4);
@@ -8371,25 +8511,25 @@ define('ghost/templates/settings/general', ['exports'], function(__exports__){ _
       } else {
         fragment = this.build(dom);
       }
-      var element6 = dom.childAt(fragment, [0]);
-      var element7 = dom.childAt(element6, [4, 1]);
-      var element8 = dom.childAt(fragment, [2, 1]);
-      var element9 = dom.childAt(element8, [1]);
-      var element10 = dom.childAt(element9, [3]);
-      var element11 = dom.childAt(element8, [7]);
-      var element12 = dom.childAt(element11, [7, 3]);
-      var morph0 = dom.createMorphAt(element6,0,1);
-      var morph1 = dom.createMorphAt(dom.childAt(element9, [1]),2,3);
-      var morph2 = dom.createMorphAt(element10,2,3);
-      var morph3 = dom.createMorphAt(dom.childAt(element10, [4]),0,1);
-      var morph4 = dom.createMorphAt(dom.childAt(element8, [3]),2,3);
-      var morph5 = dom.createMorphAt(dom.childAt(element8, [5]),2,3);
-      var morph6 = dom.createMorphAt(dom.childAt(element11, [1]),2,3);
-      var morph7 = dom.createMorphAt(dom.childAt(element11, [3]),2,3);
-      var morph8 = dom.createMorphAt(dom.childAt(element11, [5, 3]),0,1);
-      var morph9 = dom.createMorphAt(element12,0,1);
+      var element4 = dom.childAt(fragment, [0]);
+      var element5 = dom.childAt(element4, [4, 1]);
+      var element6 = dom.childAt(fragment, [2, 1]);
+      var element7 = dom.childAt(element6, [1]);
+      var element8 = dom.childAt(element7, [3]);
+      var element9 = dom.childAt(element6, [7]);
+      var element10 = dom.childAt(element9, [7, 3]);
+      var morph0 = dom.createMorphAt(element4,0,1);
+      var morph1 = dom.createMorphAt(dom.childAt(element7, [1]),2,3);
+      var morph2 = dom.createMorphAt(element8,2,3);
+      var morph3 = dom.createMorphAt(dom.childAt(element8, [4]),0,1);
+      var morph4 = dom.createMorphAt(dom.childAt(element6, [3]),2,3);
+      var morph5 = dom.createMorphAt(dom.childAt(element6, [5]),2,3);
+      var morph6 = dom.createMorphAt(dom.childAt(element9, [1]),2,3);
+      var morph7 = dom.createMorphAt(dom.childAt(element9, [3]),2,3);
+      var morph8 = dom.createMorphAt(dom.childAt(element9, [5, 3]),0,1);
+      var morph9 = dom.createMorphAt(element10,0,1);
       block(env, morph0, context, "link-to", ["settings"], {"class": "btn btn-default btn-back"}, child0, null);
-      element(env, element7, context, "action", ["save"], {});
+      element(env, element5, context, "action", ["save"], {});
       inline(env, morph1, context, "input", [], {"id": "blog-title", "name": "general[title]", "type": "text", "value": get(env, context, "model.title")});
       inline(env, morph2, context, "textarea", [], {"id": "blog-description", "name": "general[description]", "value": get(env, context, "model.description")});
       inline(env, morph3, context, "gh-count-characters", [get(env, context, "model.description")], {});
@@ -8398,7 +8538,7 @@ define('ghost/templates/settings/general', ['exports'], function(__exports__){ _
       inline(env, morph6, context, "input", [], {"id": "email-address", "name": "general[email-address]", "type": "email", "value": get(env, context, "model.email"), "autocapitalize": "off", "autocorrect": "off"});
       inline(env, morph7, context, "input", [], {"id": "postsPerPage", "name": "general[postsPerPage]", "focus-out": "checkPostsPerPage", "value": get(env, context, "model.postsPerPage"), "min": "1", "max": "1000", "type": "number", "pattern": "[0-9]*"});
       inline(env, morph8, context, "input", [], {"id": "permalinks", "name": "general[permalinks]", "type": "checkbox", "checked": get(env, context, "isDatedPermalinks")});
-      element(env, element12, context, "bind-attr", [], {"data-select-text": get(env, context, "selectedTheme.label")});
+      element(env, element10, context, "bind-attr", [], {"data-select-text": get(env, context, "selectedTheme.label")});
       inline(env, morph9, context, "view", ["select"], {"id": "activeTheme", "name": "general[activeTheme]", "content": get(env, context, "themes"), "optionValuePath": "content.name", "optionLabelPath": "content.label", "value": get(env, context, "model.activeTheme"), "selection": get(env, context, "selectedTheme")});
       return fragment;
     }
